@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Turcja — plan wycieczek</title>
+<meta name="description" content="Plan wycieczek na urlop w Turcji: Kuşadası, Efez, Pamukkale, Didyma — mapy, trasy i godziny.">
+<meta name="theme-color" content="#0f8b9c" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1f22" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#start">Przejdź do treści</a>
+
+<header class="site-header">
+  <div class="site-header__top">
+    <span class="site-header__icon" aria-hidden="true">🌊</span>
+    <div>
+      <h1>Plan wycieczek — Turcja</h1>
+      <p class="site-header__hotel" id="hotel-line">Notion Kesre Beach Hotel &amp; Spa, Özdere</p>
+    </div>
+  </div>
+  <nav class="tabbar" id="tabbar" aria-label="Sekcje strony">
+    <a href="#start" class="tab is-active">Start</a>
+    <span id="trip-tabs-anchor"></span>
+    <a href="#transport" class="tab">Transport</a>
+    <a href="#kebaby" class="tab">Kebaby</a>
+    <a href="#info" class="tab">Info</a>
+    <a href="#zrodla-zdjec" class="tab">Źródła zdjęć</a>
+  </nav>
+</header>
+
+<main>
+
+  <section id="start" class="section">
+    <div class="card hotel-card" id="hotel-card">
+      <!-- wypełniane przez JS -->
+    </div>
+
+    <div class="card">
+      <h2>Dojazd z hotelu</h2>
+      <p class="muted">
+        Hotel leży ok. 30 km na północ od Kuşadası. Komunikacja publiczna praktycznie nie istnieje —
+        zobacz szczegóły w sekcji <a href="#transport">Transport</a>.
+      </p>
+    </div>
+
+    <div class="card" id="week-plan-card">
+      <h2>Sugerowany rozkład tygodnia</h2>
+      <ol class="week-plan" id="week-plan-list"></ol>
+      <p class="muted small" id="week-plan-note"></p>
+    </div>
+
+    <div class="card">
+      <h2>Mapa ogólna — wszystkie punkty</h2>
+      <p class="muted small">Hotel, atrakcje ze wszystkich wycieczek i knajpy z kebabem w jednym widoku.</p>
+      <div class="map map--overview" id="map-overview"></div>
+      <p class="map-attribution">Mapa: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> — kafelki wymagają połączenia z internetem.</p>
+    </div>
+  </section>
+
+  <div id="trips-container"><!-- sekcje wycieczek wstawiane przez JS --></div>
+
+  <section id="transport" class="section">
+    <h2 class="section-title">Transport</h2>
+    <div class="card">
+      <p id="transport-intro"></p>
+      <div class="option-list" id="transport-options"></div>
+    </div>
+  </section>
+
+  <section id="kebaby" class="section">
+    <h2 class="section-title">Kebaby blisko hotelu</h2>
+    <div class="card-grid" id="kebaby-list"></div>
+  </section>
+
+  <section id="info" class="section">
+    <h2 class="section-title">Praktyczne info</h2>
+    <div class="card" id="info-card"></div>
+  </section>
+
+  <section id="zrodla-zdjec" class="section">
+    <h2 class="section-title">Źródła zdjęć</h2>
+    <div class="card">
+      <p class="muted small">Wszystkie zdjęcia pochodzą z Wikimedia Commons, na licencjach CC / domena publiczna.</p>
+      <ul class="credits-list" id="credits-list"></ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Zrobione ręcznie w HTML/CSS/JS · Mapy: Leaflet + OpenStreetMap · Wszystkie godziny i ceny sprawdź przed wyjazdem.</p>
+  <a href="#start" class="back-to-top">↑ Na górę</a>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
