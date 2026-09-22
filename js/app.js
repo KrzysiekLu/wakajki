@@ -14,6 +14,11 @@
     "trip-4": "#7a6a9c",
   };
 
+  // Ikona z sprite'a zdefiniowanego w index.html (<symbol id="icon-nazwa">).
+  function svgIcon(name, cls) {
+    return `<svg class="icon${cls ? " " + cls : ""}" aria-hidden="true"><use href="#icon-${name}"></use></svg>`;
+  }
+
   // ---------- Google Maps helpery ----------
 
   function gmapsShow(lat, lng) {
@@ -65,11 +70,11 @@
   }
 
   function hotelIcon() {
-    return pinIcon({ label: "🏨", colorClass: "pin--hotel", size: 34 });
+    return pinIcon({ label: svgIcon("hotel"), colorClass: "pin--hotel", size: 34 });
   }
 
   function kebabIcon() {
-    return pinIcon({ label: "🍢", colorClass: "pin--kebab", size: 28 });
+    return pinIcon({ label: svgIcon("kebab"), colorClass: "pin--kebab", size: 28 });
   }
 
   // ---------- Popup content ----------
@@ -90,7 +95,7 @@
   function renderHotelCard() {
     const el = document.getElementById("hotel-card");
     el.innerHTML = `
-      <h2>🏨 ${esc(HOTEL.name)}</h2>
+      <h2>${svgIcon("hotel")} ${esc(HOTEL.name)}</h2>
       <p class="muted">${esc(HOTEL.address)} · ${HOTEL.lat}, ${HOTEL.lng}</p>
       ${mapButtons(HOTEL.lat, HOTEL.lng)}
     `;
@@ -164,7 +169,7 @@
   }
 
   function renderTripCard(point, num, colorClass) {
-    const icon = point.kind === "meal" ? "🍽️" : "📍";
+    const icon = svgIcon(point.kind === "meal" ? "meal" : "pin");
     return `
       <li class="timeline-item timeline-item--stop ${colorClass}">
         <div class="timeline-num">${num}</div>
@@ -193,7 +198,7 @@
     const label = point.kind === "hotel-start" ? "Start" : "Koniec";
     return `
       <li class="timeline-item timeline-item--hotel">
-        <div class="timeline-num timeline-num--hotel">🏨</div>
+        <div class="timeline-num timeline-num--hotel">${svgIcon("hotel")}</div>
         <div class="timeline-body">
           <span class="timeline-time">${esc(point.time)}</span>
           <strong>${esc(point.name)}</strong>
@@ -223,7 +228,7 @@
       </h2>
       <div class="card">
         <p class="muted"><strong>Transport:</strong> ${esc(trip.transport)}</p>
-        <a class="btn btn--solid btn--wide ${trip.color}" href="${routeUrl}" target="_blank" rel="noopener">🗺️ Cała trasa w Google Maps</a>
+        <a class="btn btn--solid btn--wide ${trip.color}" href="${routeUrl}" target="_blank" rel="noopener">${svgIcon("map")} Cała trasa w Google Maps</a>
       </div>
       <div class="card">
         <div class="map map--trip" id="map-${trip.id}"></div>
@@ -278,6 +283,15 @@
       className: `route-line ${trip.color}`,
     }).addTo(map);
 
+    // Kebaby są blisko hotelu (nie na trasie samej wycieczki), ale warto je widzieć
+    // na każdej mapce — łatwo zahaczyć o jedzenie przy wyjeździe/powrocie.
+    KEBABS.forEach((k) => {
+      L.marker([k.lat, k.lng], { icon: kebabIcon() })
+        .addTo(map)
+        .bindPopup(popupHtml(k.name, "kebab", k.desc), POPUP_OPTIONS);
+      bounds.push([k.lat, k.lng]);
+    });
+
     if (bounds.length) map.fitBounds(bounds, { padding: [28, 28] });
   }
 
@@ -306,7 +320,7 @@
 
     if (TRANSPORT_INFO.bus) {
       document.getElementById("transport-bus").innerHTML = `
-        <h3>🚌 ${esc(TRANSPORT_INFO.bus.title)}</h3>
+        <h3>${svgIcon("bus")} ${esc(TRANSPORT_INFO.bus.title)}</h3>
         <p>${esc(TRANSPORT_INFO.bus.desc)}</p>
       `;
     }
@@ -318,7 +332,7 @@
     document.getElementById("kebaby-list").innerHTML = KEBABS.map(
       (k) => `
       <div class="card">
-        <h3>🍢 ${esc(k.name)}</h3>
+        <h3>${svgIcon("kebab")} ${esc(k.name)}</h3>
         <p class="muted small">${esc(k.place)}</p>
         <p>${esc(k.desc)}</p>
         ${mapButtons(k.lat, k.lng)}
@@ -332,9 +346,9 @@
     const i = PRACTICAL_INFO;
     document.getElementById("info-card").innerHTML = `
       <ul class="info-list">
-        <li>🌡️ ${esc(i.weather)}</li>
-        <li>🌅 ${esc(i.sunrise)}</li>
-        <li>🌇 ${esc(i.sunset)}</li>
+        <li>${svgIcon("thermometer")} ${esc(i.weather)}</li>
+        <li>${svgIcon("sunrise")} ${esc(i.sunrise)}</li>
+        <li>${svgIcon("sunset")} ${esc(i.sunset)}</li>
       </ul>
       <p class="muted small">${esc(i.note)}</p>
     `;

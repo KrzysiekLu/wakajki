@@ -74,6 +74,21 @@ img { max-width: 100%; }
 .muted { color: var(--muted-ink); }
 .small { font-size: 0.85rem; }
 
+/* Ikony — jeden spójny zestaw kresek (sprite w index.html), zamiast emoji.
+   Domyślnie dziedziczą kolor z otaczającego tekstu (currentColor). */
+.icon {
+  width: 1.2em;
+  height: 1.2em;
+  flex: 0 0 auto;
+  vertical-align: -0.2em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.icon--lg { width: 1.8em; height: 1.8em; }
+
 .skip-link {
   position: absolute;
   left: -999px;
@@ -82,7 +97,7 @@ img { max-width: 100%; }
   color: #fff;
   padding: 0.7rem 1.1rem;
   border-radius: 8px;
-  z-index: 1000;
+  z-index: 1300;
   text-decoration: none;
   font-weight: 700;
 }
@@ -105,7 +120,10 @@ img { max-width: 100%; }
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  /* Leaflet nadaje własnym kontrolkom/popupom z-index do 800-900 (.leaflet-control,
+     .leaflet-popup-pane), więc nagłówek musi być wyżej, inaczej mapa go przykrywa
+     przy przewijaniu. */
+  z-index: 1200;
   background: var(--bg);
   background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(8px);
@@ -121,7 +139,12 @@ img { max-width: 100%; }
   padding: 0.85rem 1rem;
 }
 
-.site-header__icon { font-size: 1.7rem; flex: 0 0 auto; }
+.site-header__icon {
+  width: 1.9rem;
+  height: 1.9rem;
+  color: var(--turquoise);
+  flex: 0 0 auto;
+}
 
 .site-header__titles { flex: 1 1 auto; min-width: 0; }
 
@@ -391,11 +414,13 @@ main {
 }
 .pin--hotel {
   background: var(--card-bg);
+  color: var(--terracotta);
   border: 2px solid var(--terracotta);
   font-size: 1.1rem;
 }
 .pin--kebab {
   background: var(--card-bg);
+  color: var(--terracotta);
   border: 2px solid var(--terracotta);
   font-size: 1rem;
 }
@@ -448,6 +473,7 @@ main {
 }
 .timeline-num--hotel {
   background: var(--card-bg);
+  color: var(--terracotta);
   border: 2px solid var(--terracotta);
   font-size: 1.2rem;
 }
