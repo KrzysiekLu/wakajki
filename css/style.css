@@ -81,6 +81,7 @@ img { max-width: 100%; }
   height: 1.2em;
   flex: 0 0 auto;
   vertical-align: -0.2em;
+  margin-right: 0.4em;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.7;
@@ -88,6 +89,12 @@ img { max-width: 100%; }
   stroke-linejoin: round;
 }
 .icon--lg { width: 1.8em; height: 1.8em; }
+/* W okrągłych znacznikach (mapa, oś czasu) ikona stoi sama, wyśrodkowana —
+   bez odstępu, który przesuwałby ją od środka. */
+.pin .icon,
+.timeline-num .icon {
+  margin-right: 0;
+}
 
 .skip-link {
   position: absolute;
@@ -142,6 +149,7 @@ img { max-width: 100%; }
 .site-header__icon {
   width: 1.9rem;
   height: 1.9rem;
+  margin-right: 0;
   color: var(--turquoise);
   flex: 0 0 auto;
 }
@@ -509,6 +517,9 @@ main {
   margin: 0.6rem 0;
 }
 .point-photos--multi { grid-template-columns: 1fr 1fr; }
+/* Gdy zdjęć jest nieparzyście (np. 3), ostatnie rozciąga się na całą szerokość
+   zamiast zostawiać puste miejsce obok siebie w siatce 2 kolumn. */
+.point-photos--multi img:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .point-photos img {
   width: 100%;
   height: auto;
