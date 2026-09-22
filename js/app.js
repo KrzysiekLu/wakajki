@@ -303,6 +303,13 @@
     document.getElementById("transport-options").innerHTML = TRANSPORT_INFO.options
       .map((o) => `<div class="option"><h3>${esc(o.title)}</h3><p>${esc(o.desc)}</p></div>`)
       .join("");
+
+    if (TRANSPORT_INFO.bus) {
+      document.getElementById("transport-bus").innerHTML = `
+        <h3>🚌 ${esc(TRANSPORT_INFO.bus.title)}</h3>
+        <p>${esc(TRANSPORT_INFO.bus.desc)}</p>
+      `;
+    }
   }
 
   // ---------- Render: kebaby ----------
@@ -346,6 +353,47 @@
     ).join("");
   }
 
+  // ---------- Menu (hamburger) ----------
+
+  function initMenu() {
+    const toggle = document.getElementById("menu-toggle");
+    const tabbar = document.getElementById("tabbar");
+
+    function closeMenu() {
+      tabbar.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+    }
+    function openMenu() {
+      tabbar.hidden = false;
+      toggle.setAttribute("aria-expanded", "true");
+    }
+
+    toggle.addEventListener("click", () => {
+      if (tabbar.hidden) openMenu();
+      else closeMenu();
+    });
+
+    // zamknij po kliknięciu w link (zakładkę)
+    tabbar.addEventListener("click", (e) => {
+      if (e.target.closest("a")) closeMenu();
+    });
+
+    // zamknij po kliknięciu poza menu
+    document.addEventListener("click", (e) => {
+      if (tabbar.hidden) return;
+      if (tabbar.contains(e.target) || toggle.contains(e.target)) return;
+      closeMenu();
+    });
+
+    // zamknij klawiszem Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !tabbar.hidden) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+  }
+
   // ---------- Scrollspy dla nawigacji ----------
 
   function initScrollspy() {
@@ -385,5 +433,6 @@
     renderCredits();
     renderOverviewMap();
     initScrollspy();
+    initMenu();
   });
 })();

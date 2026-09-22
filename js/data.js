@@ -254,7 +254,7 @@ const KEBABS = [
 
 const TRANSPORT_INFO = {
   intro:
-    "Hotel leży ok. 30 km na północ od Kuşadası. Komunikacja publiczna praktycznie nie istnieje — liczą się trzy opcje:",
+    "Hotel leży ok. 30 km na północ od Kuşadası. Do żadnej z opisanych tu wycieczek (Kuşadası, Efez, Pamukkale, Didyma) nie dojedziesz komunikacją miejską — liczą się trzy opcje:",
   options: [
     {
       title: "Auto z wypożyczalni",
@@ -269,6 +269,18 @@ const TRANSPORT_INFO = {
       desc: "Dobre rozwiązanie na dalsze trasy (np. Pamukkale), gdzie odbiór i powrót są w cenie.",
     },
   ],
+  bus: {
+    title: "Autobus miejski (ESHOT) — do Özdere i İzmiru, nie do wycieczek",
+    desc:
+      "Przy Özdere (dzielnica dawniej zwana Kesre — stąd nazwa hotelu) zatrzymuje się linia ESHOT 775 " +
+      "(Özdere ↔ Cumaovası Aktarma Merkezi, co ok. 30 min, pierwszy kurs 5:50, ostatni 00:00) oraz linia 778 " +
+      "(Özdere ↔ Ürkmez, co ok. 60–70 min, 6:00–22:00). Dokładny przystanek najbliżej hotelu sprawdź na miejscu " +
+      "(np. w recepcji albo w aplikacji Moovit) — nie mamy pewności, że jest dosłownie przy bramie. " +
+      "Z Cumaovası jedzie się dalej (İZBAN/inne linie ESHOT) w stronę İzmiru i lotniska Adnan Menderes — " +
+      "przydatne np. na tani dojazd na lotnisko. Żadna z tych linii NIE jedzie do Kuşadası, Selçuk/Efezu, " +
+      "Pamukkale ani Didymy — to inne województwo (Aydın/Denizli) obsługiwane przez innych przewoźników, " +
+      "więc do wycieczek nadal potrzebujesz auta, taksówki albo zorganizowanej wycieczki.",
+  },
 };
 
 const WEEK_PLAN = [

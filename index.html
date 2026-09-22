@@ -19,12 +19,16 @@
 <header class="site-header">
   <div class="site-header__top">
     <span class="site-header__icon" aria-hidden="true">🌊</span>
-    <div>
+    <div class="site-header__titles">
       <h1>Plan wycieczek — Turcja</h1>
       <p class="site-header__hotel" id="hotel-line">Notion Kesre Beach Hotel &amp; Spa, Özdere</p>
     </div>
+    <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="tabbar">
+      <span class="menu-toggle__icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Menu</span>
+    </button>
   </div>
-  <nav class="tabbar" id="tabbar" aria-label="Sekcje strony">
+  <nav class="tabbar" id="tabbar" aria-label="Sekcje strony" hidden>
     <a href="#start" class="tab is-active">Start</a>
     <span id="trip-tabs-anchor"></span>
     <a href="#transport" class="tab">Transport</a>
@@ -71,6 +75,7 @@
       <p id="transport-intro"></p>
       <div class="option-list" id="transport-options"></div>
     </div>
+    <div class="card card--bus" id="transport-bus"></div>
   </section>
 
   <section id="kebaby" class="section">
